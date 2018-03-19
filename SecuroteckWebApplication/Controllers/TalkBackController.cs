@@ -13,7 +13,7 @@ namespace SecuroteckWebApplication.Controllers
         public string Get()
         {
             #region TASK1
-            // TODO: add api/talkback/hello response
+            return "Hello World";
             #endregion
         }
 
@@ -21,9 +21,7 @@ namespace SecuroteckWebApplication.Controllers
         public int[] Get([FromUri]int[] integers)
         {
             #region TASK1
-            // TODO: 
-            // sort the integers into ascending order
-            // send the integers back as the api/talkback/sort response
+            return integers.OrderBy(i => i).ToArray();
             #endregion
         }
 
