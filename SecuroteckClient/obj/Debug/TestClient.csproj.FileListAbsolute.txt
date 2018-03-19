@@ -1,0 +1,5 @@
+C:\Temp\TestClientServer\WebApplication1\TestClient\bin\Debug\TestClient.exe.config
+C:\Temp\TestClientServer\WebApplication1\TestClient\bin\Debug\TestClient.exe
+C:\Temp\TestClientServer\WebApplication1\TestClient\bin\Debug\TestClient.pdb
+C:\Temp\TestClientServer\WebApplication1\TestClient\obj\Debug\TestClient.exe
+C:\Temp\TestClientServer\WebApplication1\TestClient\obj\Debug\TestClient.pdb

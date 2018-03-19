@@ -1,0 +1,35 @@
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\csc.exe
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\System.Collections.Immutable.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\System.Reflection.Metadata.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\vbc.exe
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\VBCSCompiler.exe
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\roslyn\VBCSCompiler.exe.config
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\WebApplication1.dll.config
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\Newtonsoft.Json.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\System.Net.Http.Formatting.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\System.Web.Http.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\System.Web.Http.WebHost.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\Newtonsoft.Json.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\System.Net.Http.Formatting.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\System.Web.Http.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\System.Web.Http.WebHost.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\EntityFramework.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.dll
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\EntityFramework.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\bin\EntityFramework.SqlServer.xml
+C:\Temp\TestClientServer\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\461462\Documents\08346 Coursework\Securoteck Skeleton Solution\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+C:\Users\461462\Documents\08346 Coursework\Securoteck Skeleton Solution\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Users\461462\Documents\08346 Coursework\Securoteck Skeleton Solution\WebApplication1\obj\Debug\WebApplication1.pdb
