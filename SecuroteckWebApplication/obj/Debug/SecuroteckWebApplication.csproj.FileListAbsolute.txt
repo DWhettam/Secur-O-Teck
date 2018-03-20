@@ -1,32 +1,35 @@
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\csc.exe
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CSharp.Core.targets
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\System.Collections.Immutable.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\System.Reflection.Metadata.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\vbc.exe
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\VBCSCompiler.exe
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\VBCSCompiler.exe.config
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\SecuroteckWebApplication.dll.config
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\SecuroteckWebApplication.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\SecuroteckWebApplication.pdb
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.SqlServer.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\Newtonsoft.Json.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\System.Net.Http.Formatting.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.WebHost.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.SqlServer.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\Newtonsoft.Json.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\System.Net.Http.Formatting.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.WebHost.xml
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.CoreCompileInputs.cache
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.dll
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.pdb
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\csc.exe
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\vbc.exe
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\VBCSCompiler.exe
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\SecuroteckWebApplication.dll.config
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\SecuroteckWebApplication.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\SecuroteckWebApplication.pdb
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\EntityFramework.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\Newtonsoft.Json.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\System.Net.Http.Formatting.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\System.Web.Http.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\System.Web.Http.WebHost.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\EntityFramework.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\Newtonsoft.Json.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\System.Net.Http.Formatting.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\System.Web.Http.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\bin\System.Web.Http.WebHost.xml
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.dll
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.pdb
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.Migrations.Migration1.resources
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.GenerateResource.Cache

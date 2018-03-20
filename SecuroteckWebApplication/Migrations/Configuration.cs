@@ -9,9 +9,7 @@ namespace SecuroteckWebApplication.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
-            //AutomaticMigrationDataLossAllowed = true; // Uncomment this line to do a db update that would cause data loss
-            ContextKey = "SecuroteckWebApplication.Models.UserContext";
+            AutomaticMigrationsEnabled = false;
         }
 
         protected override void Seed(SecuroteckWebApplication.Models.UserContext context)

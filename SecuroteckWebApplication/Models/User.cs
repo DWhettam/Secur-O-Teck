@@ -10,13 +10,9 @@ namespace SecuroteckWebApplication.Models
     public class User
     {
         #region Task2
-        [Key]
-        public string ApiKey { get; set; }
-        public string UserName { get; set; }
-        public User()
-        {
-
-        }
+            [Key]
+            public string ApiKey { get; set; }
+            public string UserName { get; set; }
         #endregion
     }
 

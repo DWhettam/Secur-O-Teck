@@ -1,6 +1,6 @@
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckClient\bin\Debug\SecuroteckClient.exe.config
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckClient\bin\Debug\SecuroteckClient.exe
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckClient\bin\Debug\SecuroteckClient.pdb
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.csproj.CoreCompileInputs.cache
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.exe
-E:\Users\Dan\Uni\Modules\08346 - Distributed Systems\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.pdb
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckClient\bin\Debug\SecuroteckClient.exe.config
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckClient\bin\Debug\SecuroteckClient.exe
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckClient\bin\Debug\SecuroteckClient.pdb
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckClient\obj\Debug\SecuroteckClient.csproj.CoreCompileInputs.cache
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckClient\obj\Debug\SecuroteckClient.exe
+C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckClient\obj\Debug\SecuroteckClient.pdb
