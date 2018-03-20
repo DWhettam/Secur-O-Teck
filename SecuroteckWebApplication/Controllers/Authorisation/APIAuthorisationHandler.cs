@@ -14,9 +14,20 @@ namespace SecuroteckWebApplication.Controllers
     {
         protected override Task<HttpResponseMessage> SendAsync (HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            #region Task5
-            // TODO:  Find if a header ‘ApiKey’ exists, and if it does, check the database to determine if the given API Key is valid
-            //        Then authorise the principle on the current thread using a claim, claimidentity and claimsprinciple
+            #region Task5           
+            var header = request.Headers;
+            if (header.Contains("ApiKey"))
+            {                
+                Models.UserDatabaseAccess databaseAccess = new Models.UserDatabaseAccess();
+                User user = databaseAccess.ApiKeyExistsReturnUser(header.GetValues("ApiKey").First());
+                Claim claim = new Claim(ClaimTypes.Name, user.UserName);
+                Claim[] claims = new Claim[1];
+                claims[1] = claim;
+                
+                ClaimsIdentity identity = new ClaimsIdentity(claims, "ApiKey");
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                Thread.CurrentPrincipal = principal;
+            }
             #endregion
             return base.SendAsync(request, cancellationToken);
         }
