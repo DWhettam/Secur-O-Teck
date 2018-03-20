@@ -23,9 +23,74 @@ namespace SecuroteckWebApplication.Models
     public class UserDatabaseAccess
     {
         #region Task3 
-        // TODO: Make methods which allow us to read from/write to the database 
+        //Insert user
+        public User InsertUser(string userName)
+        {
+            var apiKey = Guid.NewGuid();
+            User user = new User
+            {
+                ApiKey = apiKey.ToString(),
+                UserName = userName,
+            };
+            using (var context = new UserContext())
+            {
+                context.Users.Add(user);
+                context.SaveChanges();
+            }
+            return user;
+        }
+        //check if api key exists in db
+        public bool ApiKeyExists(string key)
+        {
+            using (var context = new UserContext())
+            {
+                if (context.Users.Find(key) != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        //check if username exists in database
+        public bool UserExists(string userName)
+        {
+            using (var context = new UserContext())
+            {
+                if (context.Users.Any(a => a.UserName == userName))
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        //check if api key and username exists in database
+        public bool ApiKeyUserExists(string key, string userName)
+        {
+            using (var context = new UserContext())
+            {
+                if (context.Users.Find(key, userName) != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        //check if api key exists in database, returns user
+        public User ApiKeyExistsReturnUser(string key)
+        {
+            using (var context = new UserContext())
+            {
+                return context.Users.Find(key);
+            }
+        }
+
+        public void DeleteUser(string key)
+        {   
+            using (var context = new UserContext())
+            {                
+                context.Users.Remove(context.Users.First(a => a.ApiKey == key));
+            }
+        }
         #endregion
     }
-
-
 }

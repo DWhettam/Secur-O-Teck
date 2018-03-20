@@ -11,6 +11,8 @@ namespace SecuroteckWebApplication.Models
         public UserContext() : base()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<UserContext, Migrations.Configuration>());
+            this.Configuration.LazyLoadingEnabled = true;
+            this.Configuration.ProxyCreationEnabled = true;
         }
 
         public DbSet<User> Users { get; set; }

@@ -33,3 +33,39 @@ C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\
 C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.pdb
 C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.Migrations.Migration1.resources
 C:\Users\Daniel\Downloads\Securoteck Skeleton Solution\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.GenerateResource.Cache
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\csc.exe
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\vbc.exe
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\VBCSCompiler.exe
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\SecuroteckWebApplication.dll.config
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\SecuroteckWebApplication.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\SecuroteckWebApplication.pdb
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.SqlServer.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\Newtonsoft.Json.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\System.Net.Http.Formatting.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.WebHost.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\EntityFramework.SqlServer.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\Newtonsoft.Json.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\System.Net.Http.Formatting.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\bin\System.Web.Http.WebHost.xml
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csprojResolveAssemblyReference.cache
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.Migrations.Migration1.resources
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.GenerateResource.cache
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.CoreCompileInputs.cache
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.csproj.CopyComplete
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.dll
+C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckWebApplication\obj\Debug\SecuroteckWebApplication.pdb

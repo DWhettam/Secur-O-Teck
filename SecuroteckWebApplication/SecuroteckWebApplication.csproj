@@ -96,6 +96,7 @@
     <Compile Include="Controllers\Authorisation\APIAuthorisationHandler.cs" />
     <Compile Include="Controllers\Authorisation\CustomAuthoriseAttribute.cs" />
     <Compile Include="Controllers\TalkBackController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
