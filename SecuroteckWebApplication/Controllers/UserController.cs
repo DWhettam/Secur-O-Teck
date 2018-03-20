@@ -30,6 +30,19 @@ namespace SecuroteckWebApplication.Controllers
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             Models.User newUser = dbAccess.InsertUser(username);
             return newUser.ApiKey.ToString();
+        }       
+        [CustomAuthorise]
+        [ActionName("removeuser")]
+        public bool Delete(HttpRequestMessage request, [FromUri]string username)
+        {
+            string key = request.Headers.GetValues("ApiKey").First().ToString();
+            Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            if (dbAccess.ApiKeyUserExists(key, username))
+            {
+                dbAccess.DeleteUser(key);
+                return true;
+            }
+            return false;
         }
     }
 }

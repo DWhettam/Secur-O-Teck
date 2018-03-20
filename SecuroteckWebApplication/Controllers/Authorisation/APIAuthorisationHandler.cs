@@ -22,7 +22,7 @@ namespace SecuroteckWebApplication.Controllers
                 User user = databaseAccess.ApiKeyExistsReturnUser(header.GetValues("ApiKey").First());
                 Claim claim = new Claim(ClaimTypes.Name, user.UserName);
                 Claim[] claims = new Claim[1];
-                claims[1] = claim;
+                claims[0] = claim;
                 
                 ClaimsIdentity identity = new ClaimsIdentity(claims, "ApiKey");
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);

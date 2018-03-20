@@ -68,7 +68,7 @@ namespace SecuroteckWebApplication.Models
         {
             using (var context = new UserContext())
             {
-                if (context.Users.Find(key, userName) != null)
+                if (context.Users.Any(o => o.ApiKey == key && o.UserName == userName))
                 {
                     return true;
                 }
@@ -87,8 +87,11 @@ namespace SecuroteckWebApplication.Models
         public void DeleteUser(string key)
         {   
             using (var context = new UserContext())
-            {                
-                context.Users.Remove(context.Users.First(a => a.ApiKey == key));
+            {
+                User user = context.Users.First(a => a.ApiKey == key);
+                context.Users.Attach(user);
+                context.Users.Remove(user);
+                context.SaveChanges();
             }
         }
         #endregion
