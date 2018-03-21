@@ -13,32 +13,42 @@ namespace SecuroteckWebApplication.Controllers
     {
         [CustomAuthorise]
         [ActionName("hello")]        
-        public string Get(HttpRequestMessage request)
+        public IHttpActionResult Get(HttpRequestMessage request)
         {
             string key = request.Headers.GetValues("ApiKey").First().ToString();
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
-            Models.User user = dbAccess.ApiKeyExistsReturnUser(key);
-            return "Hello" + user.UserName.ToString();
+            Models.User user = dbAccess.ApiKeyExistsReturnUser(key);           
+            return Ok("Hello " + user.UserName.ToString());
         }
 
         [CustomAuthorise]
         [ActionName("sha1")]
         [HttpGet]
-        public string SHA1([FromUri] string message)
+        public IHttpActionResult SHA1([FromUri] string message)
         {
+            if (message == "")
+            {
+                return BadRequest("Bad Request");
+            }
+
             byte[] data = Encoding.ASCII.GetBytes(message);
             SHA1 sha = new SHA1CryptoServiceProvider();
-            return Convert.ToBase64String(sha.ComputeHash(data));
+            return Ok(Convert.ToBase64String(sha.ComputeHash(data)));
         }
 
         [CustomAuthorise]
         [ActionName("sha256")]
         [HttpGet]
-        public string SHA256([FromUri] string message)
+        public IHttpActionResult SHA256([FromUri] string message)
         {
+            if (message == "")
+            {
+                return BadRequest("Bad Request");
+            }
+
             byte[] data = Encoding.ASCII.GetBytes(message);
             SHA256 sha = new SHA256CryptoServiceProvider();
-            return Convert.ToBase64String(sha.ComputeHash(data));
+            return Ok(Convert.ToBase64String(sha.ComputeHash(data)));
         }
     }
 }

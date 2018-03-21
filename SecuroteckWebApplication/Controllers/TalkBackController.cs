@@ -10,18 +10,18 @@ namespace SecuroteckWebApplication.Controllers
     public class TalkBackController : ApiController
     {
         [ActionName("Hello")]
-        public string Get()
+        public IHttpActionResult Get()
         {
             #region TASK1
-            return "Hello World";
+            return Ok("Hello World");
             #endregion
         }
 
         [ActionName("Sort")]
-        public int[] Get([FromUri]int[] integers)
+        public IHttpActionResult Get([FromUri]int[] integers)
         {
             #region TASK1
-            return integers.OrderBy(i => i).ToArray();
+            return Ok(integers.OrderBy(i => i).ToArray());
             #endregion
         }
 
