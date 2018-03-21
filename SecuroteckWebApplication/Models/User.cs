@@ -55,12 +55,8 @@ namespace SecuroteckWebApplication.Models
         public bool UserExists(string userName)
         {
             using (var context = new UserContext())
-            {
-                if (context.Users.Any(a => a.UserName == userName))
-                {
-                    return true;
-                }
-                return false;
+            {                
+                return context.Users.Any(a => a.UserName == userName);
             }
         }
         //check if api key and username exists in database

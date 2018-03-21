@@ -20,9 +20,9 @@ namespace SecuroteckWebApplication.Controllers
             return Ok("False - User Does Not Exist! Did you mean to do a POST to create a new user?");
         }
         [ActionName("new")]       
-        public IHttpActionResult Post(HttpRequestMessage request)
-        {
-            string username = request.Content.ReadAsStringAsync().Result;
+        public IHttpActionResult Post([FromBody] string username)
+        {            
+            //string username = request.Content.ReadAsStringAsync().Result;
             if (username == null)
             {
                 return BadRequest("Oops. Make sure your body contains a string with your username and your Content-Type is Content - Type:application / json");
