@@ -12,13 +12,14 @@ namespace SecuroteckClient
     #region Task 8 and beyond
     class Client
     {
-        public static List<User> Users = new List<User>();
+        public static string apiKey;
+        public static string userName;
         static HttpClient client = new HttpClient();
         static void Main(string[] args)
         {
             RunAsync().GetAwaiter().GetResult();
         }       
-        
+        //Talkback methods
         static async Task<string> GetTalkBackHello(string path)
         {
             HttpResponseMessage response = await client.GetAsync(path);
@@ -38,7 +39,7 @@ namespace SecuroteckClient
             HttpResponseMessage response = await client.GetAsync(path);
             return await response.Content.ReadAsStringAsync();
         }
-
+        //User methods
         static async Task<string> GetUser(string user)
         {
             string path = "api/user/new?username=" + user;
@@ -51,8 +52,17 @@ namespace SecuroteckClient
             HttpResponseMessage response = await client.PostAsJsonAsync(path, user);
             if (response.IsSuccessStatusCode)
             {
+                apiKey = response.Content.ReadAsStringAsync().ToString();
+                userName = user;
                 return "Got API Key";
             }           
+            return await response.Content.ReadAsStringAsync();
+        }
+        static async Task<string> DeleteUser(string apikey, string user)
+        {
+            string path = "api/user/removeuser";
+            HttpResponseMessage response = await client.PostAsJsonAsync(path, user);
+            response.Headers.Add("apikey", apikey);
             return await response.Content.ReadAsStringAsync();
         }
 
@@ -132,16 +142,20 @@ namespace SecuroteckClient
                                     }
                                     break;
                                 case "Set":
-                                    User user = new User
-                                    {
-                                        ApiKey = userResponse[4],
-                                        UserName = userResponse[4]
-                                    };
-                                    Users.Add(user);
+                                    apiKey = userResponse[2];
+                                    userName = userResponse[3];
                                     Console.WriteLine("Stored");
                                     break;
                                 case "Delete":
-
+                                    Task<string> userDelte = DeleteUser(apiKey, userName);
+                                    if (await Task.WhenAny(userDelte, Task.Delay(20000)) == userDelte)
+                                    {
+                                        Console.WriteLine(userDelte.Result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Request Timed Out");
+                                    }
                                     break;
                                 default:
                                     break;
