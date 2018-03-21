@@ -95,6 +95,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Authorisation\APIAuthorisationHandler.cs" />
     <Compile Include="Controllers\Authorisation\CustomAuthoriseAttribute.cs" />
+    <Compile Include="Controllers\ProtectedController.cs" />
     <Compile Include="Controllers\TalkBackController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
