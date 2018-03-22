@@ -12,8 +12,8 @@ namespace SecuroteckClient
     #region Task 8 and beyond
     class Client
     {
-        public static string apiKey;
-        public static string userName;
+        public static string apiKey = "";
+        public static string userName = "";
         static HttpClient client = new HttpClient();
         static void Main(string[] args)
         {
@@ -60,18 +60,56 @@ namespace SecuroteckClient
         }
         static async Task<string> DeleteUser(string apikey, string user)
         {
-            string path = "api/user/removeuser?username=" + user;
-            client.DefaultRequestHeaders.Add("ApiKey", apikey);           
-            HttpResponseMessage response = await client.DeleteAsync(path);            
-            return await response.Content.ReadAsStringAsync();
+            if (apiKey != "")
+            {
+                string path = "api/user/removeuser?username=" + user;
+                client.DefaultRequestHeaders.Add("ApiKey", apikey);
+                HttpResponseMessage response = await client.DeleteAsync(path);
+                return await response.Content.ReadAsStringAsync();
+            }
+            return "You need to do a User Post or User Set first";
+
+        }
+
+        static async Task<string> GetProtectedHello()
+        {            
+            if (apiKey != "")
+            {
+                string path = "api/protected/hello";
+                client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+                HttpResponseMessage response = await client.GetAsync(path);
+                return await response.Content.ReadAsStringAsync();
+            }
+            return "You need to do a User Post or User Set first";
+
+        }
+        static async Task<string> GetProtectedSHA1(string message)
+        {
+            if (apiKey != "")
+            {
+                string path = "api/protected/sha1?message=" + message;
+                client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+                HttpResponseMessage response = await client.GetAsync(path);
+                return await response.Content.ReadAsStringAsync();
+            }
+            return "You need to do a User Post or User Set first";
+        }
+        static async Task<string> GetProtectedSHA256(string message)
+        {
+            if (apiKey != "")
+            {
+                string path = "api/protected/sha256?message=" + message;
+                client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+                HttpResponseMessage response = await client.GetAsync(path);
+                return await response.Content.ReadAsStringAsync();
+            }
+            return "You need to do a User Post or User Set first";
         }
 
         static async Task RunAsync()
         {            
             // Update port # in the following line.
-            client.BaseAddress = new Uri("http://localhost:24702/");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.BaseAddress = new Uri("http://localhost:24702/");   
             try
             {
                 Console.WriteLine("Hello. What would you like to do?");
@@ -79,6 +117,10 @@ namespace SecuroteckClient
                 
                 while (response != "Exit")
                 {
+                    //client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                     string[] userResponse = response.Split(' ');
                     Console.WriteLine("...please wait...");
                     switch (userResponse[0])
@@ -144,10 +186,10 @@ namespace SecuroteckClient
                                     Console.WriteLine("Stored");
                                     break;
                                 case "Delete":
-                                    Task<string> userDelte = DeleteUser(apiKey, userName);
-                                    if (await Task.WhenAny(userDelte, Task.Delay(20000)) == userDelte)
+                                    Task<string> userDelete = DeleteUser(apiKey, userName);
+                                    if (await Task.WhenAny(userDelete, Task.Delay(20000)) == userDelete)
                                     {
-                                        Console.WriteLine(userDelte.Result);
+                                        Console.WriteLine(userDelete.Result);
                                     }
                                     else
                                     {
@@ -159,7 +201,44 @@ namespace SecuroteckClient
                             }
                             break;
                         case "Protected":
-                            //Protected(userResponse[1]);
+                            switch (userResponse[1])
+                            {
+                                case "Hello":
+                                    Task<string> protectedGetHello = GetProtectedHello();
+                                    if (await Task.WhenAny(protectedGetHello, Task.Delay(20000)) == protectedGetHello)
+                                    {
+                                        Console.WriteLine(protectedGetHello.Result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Request Timed Out");
+                                    }
+                                    break;
+                                case "SHA1":
+                                    Task<string> protectedGetSHA1 = GetProtectedSHA1(userResponse[2]);
+                                    if (await Task.WhenAny(protectedGetSHA1, Task.Delay(20000)) == protectedGetSHA1)
+                                    {
+                                        Console.WriteLine(protectedGetSHA1.Result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Request Timed Out");
+                                    }
+                                    break;
+                                case "SHA256":
+                                    Task<string> protectedGetSHA256 = GetProtectedSHA256(userResponse[2]);
+                                    if (await Task.WhenAny(protectedGetSHA256, Task.Delay(20000)) == protectedGetSHA256)
+                                    {
+                                        Console.WriteLine(protectedGetSHA256.Result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Request Timed Out");
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
                             break;
                         default:
                             Console.WriteLine("Unrecognised Command");
