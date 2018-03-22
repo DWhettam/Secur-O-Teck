@@ -52,7 +52,7 @@ namespace SecuroteckClient
             HttpResponseMessage response = await client.PostAsJsonAsync(path, user);
             if (response.IsSuccessStatusCode)
             {
-                apiKey = response.Content.ReadAsStringAsync().ToString();
+                apiKey = response.Content.ReadAsAsync<string>().Result;
                 userName = user;
                 return "Got API Key";
             }           
@@ -60,9 +60,9 @@ namespace SecuroteckClient
         }
         static async Task<string> DeleteUser(string apikey, string user)
         {
-            string path = "api/user/removeuser";
-            HttpResponseMessage response = await client.PostAsJsonAsync(path, user);
-            response.Headers.Add("apikey", apikey);
+            string path = "api/user/removeuser?username=" + user;
+            client.DefaultRequestHeaders.Add("ApiKey", apikey);           
+            HttpResponseMessage response = await client.DeleteAsync(path);            
             return await response.Content.ReadAsStringAsync();
         }
 
