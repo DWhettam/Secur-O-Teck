@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.IO;
 
 namespace SecuroteckClient
 {
@@ -19,6 +20,19 @@ namespace SecuroteckClient
         {
             RunAsync().GetAwaiter().GetResult();
         }       
+        static void SaveDetailsToFile()
+        {
+            string contents = apiKey + Environment.NewLine + userName;
+            File.WriteAllText(Environment.CurrentDirectory, contents);
+        }
+        static void LoadDetailsFromFile()
+        {
+            using (StreamReader reader = new StreamReader(Environment.CurrentDirectory))
+            {
+                apiKey = reader.ReadLine();
+                userName = reader.ReadLine();
+            }
+        }
         //Talkback methods
         static async Task<string> GetTalkBackHello(string path)
         {
@@ -70,7 +84,7 @@ namespace SecuroteckClient
             return "You need to do a User Post or User Set first";
 
         }
-
+        //Protected methods
         static async Task<string> GetProtectedHello()
         {            
             if (apiKey != "")
@@ -109,18 +123,18 @@ namespace SecuroteckClient
         static async Task RunAsync()
         {            
             // Update port # in the following line.
-            client.BaseAddress = new Uri("http://localhost:24702/");   
-            try
-            {
-                Console.WriteLine("Hello. What would you like to do?");
-                string response = Console.ReadLine();
-                
-                while (response != "Exit")
-                {
-                    //client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            client.BaseAddress = new Uri("http://localhost:24702/");
+            LoadDetailsFromFile();
+            Console.WriteLine("Hello. What would you like to do?");
+            string response = Console.ReadLine();
 
+            while (response != "Exit")
+            {
+                //client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                try
+                {
                     string[] userResponse = response.Split(' ');
                     Console.WriteLine("...please wait...");
                     switch (userResponse[0])
@@ -179,10 +193,12 @@ namespace SecuroteckClient
                                     {
                                         Console.WriteLine("Request Timed Out");
                                     }
+                                    //SaveDetailsToFile();
                                     break;
                                 case "Set":
                                     apiKey = userResponse[2];
                                     userName = userResponse[3];
+                                    //SaveDetailsToFile();
                                     Console.WriteLine("Stored");
                                     break;
                                 case "Delete":
@@ -247,14 +263,11 @@ namespace SecuroteckClient
                     Console.WriteLine("What would you like to do next?");
                     response = Console.ReadLine();
                 }
-                
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
-            Console.ReadLine();
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }                
+            }            
         }
     }
     #endregion

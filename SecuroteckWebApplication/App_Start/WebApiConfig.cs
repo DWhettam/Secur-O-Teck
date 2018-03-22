@@ -16,8 +16,8 @@ namespace SecuroteckWebApplication
             // Web API configuration and services
             GlobalConfiguration.Configuration.MessageHandlers.Add(new APIAuthorisationHandler());
 
-            #region Task 7
-            // Configuration for Task 9
+            #region Task 9
+            RSACryptoServiceProvider RSAKey = new RSACryptoServiceProvider();
             #endregion
 
             // Web API routes
