@@ -71,15 +71,12 @@ namespace SecuroteckClient
             // Update port # in the following line.
             client.BaseAddress = new Uri("http://localhost:24702/");
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
-
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             try
             {
                 Console.WriteLine("Hello. What would you like to do?");
                 string response = Console.ReadLine();
                 
-
                 while (response != "Exit")
                 {
                     string[] userResponse = response.Split(' ');

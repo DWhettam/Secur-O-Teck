@@ -27,6 +27,7 @@ namespace SecuroteckWebApplication.Controllers
             {
                 return BadRequest("Oops. Make sure your body contains a string with your username and your Content-Type is Content - Type:application / json");
             }
+            
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             Models.User newUser = dbAccess.InsertUser(username);
             return Ok(newUser.ApiKey);
