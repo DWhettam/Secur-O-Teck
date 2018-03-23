@@ -20,24 +20,24 @@ namespace SecuroteckClient
         {
             RunAsync().GetAwaiter().GetResult();
         }       
-        static void SaveDetailsToFile()
-        {
-            string contents = apiKey + Environment.NewLine + userName;
-            File.WriteAllText(Environment.CurrentDirectory, contents);
-        }
-        static void LoadDetailsFromFile()
-        {
-            using (StreamReader reader = new StreamReader(Environment.CurrentDirectory))
-            {
-                apiKey = reader.ReadLine();
-                userName = reader.ReadLine();
-            }
-        }
+        //static void SaveDetailsToFile()
+        //{
+        //    string contents = apiKey + Environment.NewLine + userName;
+        //    File.WriteAllText(Environment.CurrentDirectory, contents);
+        //}
+        //static void LoadDetailsFromFile()
+        //{
+        //    using (StreamReader reader = new StreamReader(Environment.CurrentDirectory))
+        //    {
+        //        apiKey = reader.ReadLine();
+        //        userName = reader.ReadLine();
+        //    }
+        //}
         //Talkback methods
         static async Task<string> GetTalkBackHello(string path)
         {
             HttpResponseMessage response = await client.GetAsync(path);
-            return await response.Content.ReadAsStringAsync();            
+            return await response.Content.ReadAsAsync<string>();            
         }
         static async Task<string> GetTalkBackSort(string intArrayString)
         {
@@ -58,7 +58,7 @@ namespace SecuroteckClient
         {
             string path = "api/user/new?username=" + user;
             HttpResponseMessage response = await client.GetAsync(path);
-            return await response.Content.ReadAsStringAsync();
+            return await response.Content.ReadAsAsync<string>();
         }
         static async Task<string> PostUser(string user)
         {
@@ -70,7 +70,7 @@ namespace SecuroteckClient
                 userName = user;
                 return "Got API Key";
             }           
-            return await response.Content.ReadAsStringAsync();
+            return await response.Content.ReadAsAsync<string>();
         }
         static async Task<string> DeleteUser(string apikey, string user)
         {
@@ -79,7 +79,7 @@ namespace SecuroteckClient
                 string path = "api/user/removeuser?username=" + user;
                 client.DefaultRequestHeaders.Add("ApiKey", apikey);
                 HttpResponseMessage response = await client.DeleteAsync(path);
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsAsync<string>();
             }
             return "You need to do a User Post or User Set first";
 
@@ -92,7 +92,7 @@ namespace SecuroteckClient
                 string path = "api/protected/hello";
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsAsync<string>();
             }
             return "You need to do a User Post or User Set first";
 
@@ -104,7 +104,7 @@ namespace SecuroteckClient
                 string path = "api/protected/sha1?message=" + message;
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsAsync<string>();
             }
             return "You need to do a User Post or User Set first";
         }
@@ -115,7 +115,7 @@ namespace SecuroteckClient
                 string path = "api/protected/sha256?message=" + message;
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
-                return await response.Content.ReadAsStringAsync();
+                return await response.Content.ReadAsAsync<string>();
             }
             return "You need to do a User Post or User Set first";
         }
@@ -124,7 +124,7 @@ namespace SecuroteckClient
         {            
             // Update port # in the following line.
             client.BaseAddress = new Uri("http://localhost:24702/");
-            LoadDetailsFromFile();
+            //LoadDetailsFromFile();
             Console.WriteLine("Hello. What would you like to do?");
             string response = Console.ReadLine();
 
@@ -152,7 +152,6 @@ namespace SecuroteckClient
                                     {
                                         Console.WriteLine("Request Timed Out");
                                     }
-
                                     break;
                                 case "Sort":
                                     Task<string> talkBackSort = GetTalkBackSort(userResponse[2]);

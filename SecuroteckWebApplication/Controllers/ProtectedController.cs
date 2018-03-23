@@ -12,8 +12,9 @@ namespace SecuroteckWebApplication.Controllers
     public class ProtectedController : ApiController
     {
         [CustomAuthorise]
-        [ActionName("hello")]        
-        public IHttpActionResult Get(HttpRequestMessage request)
+        [ActionName("hello")]     
+        [HttpGet]
+        public IHttpActionResult GetHello(HttpRequestMessage request)
         {
             string key = request.Headers.GetValues("ApiKey").First().ToString();
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
@@ -31,9 +32,11 @@ namespace SecuroteckWebApplication.Controllers
                 return BadRequest("Bad Request");
             }
 
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            SHA1 sha = new SHA1CryptoServiceProvider();
-            return Ok(Convert.ToBase64String(sha.ComputeHash(data)));
+            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] sha1ByteMessage;
+            SHA1 sha1Provider = new SHA1CryptoServiceProvider();
+            sha1ByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
+            return Ok(BitConverter.ToString(sha1ByteMessage));
         }
 
         [CustomAuthorise]
@@ -46,9 +49,19 @@ namespace SecuroteckWebApplication.Controllers
                 return BadRequest("Bad Request");
             }
 
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            SHA256 sha = new SHA256CryptoServiceProvider();
-            return Ok(Convert.ToBase64String(sha.ComputeHash(data)));
+            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] sha256ByteMessage;
+            SHA256 sha256Provider = new SHA256CryptoServiceProvider();
+            sha256ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
+            return Ok(BitConverter.ToString(sha256ByteMessage));
+        }
+
+        [CustomAuthorise]
+        [ActionName("getpublickey")]
+        [HttpGet]
+        public IHttpActionResult GetPublicKey(HttpRequestMessage requeest)
+        {
+            return Ok(WebApiConfig.publicKey);
         }
     }
 }

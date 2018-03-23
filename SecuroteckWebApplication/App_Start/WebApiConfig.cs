@@ -10,14 +10,17 @@ namespace SecuroteckWebApplication
     public static class WebApiConfig
     {
         // Publically accessible global static variables could go here
-
+        public static string publicKey = "";
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
             GlobalConfiguration.Configuration.MessageHandlers.Add(new APIAuthorisationHandler());
 
             #region Task 9
-            RSACryptoServiceProvider RSAKey = new RSACryptoServiceProvider();
+            CspParameters cspParams = new CspParameters();
+            cspParams.Flags = CspProviderFlags.UseMachineKeyStore;
+            RSACryptoServiceProvider rsaProvider = new RSACryptoServiceProvider(cspParams);
+            publicKey = rsaProvider.ToXmlString(false);
             #endregion
 
             // Web API routes
