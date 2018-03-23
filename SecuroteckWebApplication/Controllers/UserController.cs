@@ -21,8 +21,7 @@ namespace SecuroteckWebApplication.Controllers
         }
         [ActionName("new")]       
         public IHttpActionResult Post([FromBody] string username)
-        {            
-            //string username = request.Content.ReadAsStringAsync().Result;
+        {                        
             if (username == null)
             {
                 return BadRequest("Oops. Make sure your body contains a string with your username and your Content-Type is Content - Type:application / json");

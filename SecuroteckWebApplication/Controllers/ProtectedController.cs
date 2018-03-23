@@ -59,7 +59,7 @@ namespace SecuroteckWebApplication.Controllers
         [CustomAuthorise]
         [ActionName("getpublickey")]
         [HttpGet]
-        public IHttpActionResult GetPublicKey(HttpRequestMessage requeest)
+        public IHttpActionResult GetPublicKey(HttpRequestMessage request)
         {
             return Ok(WebApiConfig.rsaProvider.ToXmlString(false));
         }

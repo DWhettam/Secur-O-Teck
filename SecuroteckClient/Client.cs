@@ -15,6 +15,7 @@ namespace SecuroteckClient
     {
         public static string apiKey = "";
         public static string userName = "";
+        public static string publicKey = "";
         static HttpClient client = new HttpClient();
         static void Main(string[] args)
         {
@@ -124,7 +125,13 @@ namespace SecuroteckClient
             string path = "/api/protected/getpublickey";
             client.DefaultRequestHeaders.Add("ApiKey", apiKey);
             HttpResponseMessage response = await client.GetAsync(path);
-            return await response.Content.ReadAsAsync<string>();
+            if (response.IsSuccessStatusCode)
+            {
+                apiKey = await response.Content.ReadAsAsync<string>();
+                return "Got Public Key";
+            }
+            return "Couldn't Get the Public Key";
+            
         }
 
         static async Task RunAsync()
@@ -279,14 +286,14 @@ namespace SecuroteckClient
                         default:
                             Console.WriteLine("Unrecognised Command");
                             break;
-                    }
-                    Console.WriteLine("What would you like to do next?");
-                    response = Console.ReadLine();
+                    }                    
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                }                
+                }
+                Console.WriteLine("What would you like to do next?");
+                response = Console.ReadLine();
             }            
         }
     }
