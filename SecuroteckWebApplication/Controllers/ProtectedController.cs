@@ -61,7 +61,7 @@ namespace SecuroteckWebApplication.Controllers
         [HttpGet]
         public IHttpActionResult GetPublicKey(HttpRequestMessage requeest)
         {
-            return Ok(WebApiConfig.publicKey);
+            return Ok(WebApiConfig.rsaProvider.ToXmlString(false));
         }
     }
 }

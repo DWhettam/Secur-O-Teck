@@ -119,6 +119,13 @@ namespace SecuroteckClient
             }
             return "You need to do a User Post or User Set first";
         }
+        static async Task<string> GetProtectedPublicKey()
+        {
+            string path = "/api/protected/getpublickey";
+            client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+            HttpResponseMessage response = await client.GetAsync(path);
+            return await response.Content.ReadAsAsync<string>();
+        }
 
         static async Task RunAsync()
         {            
@@ -250,6 +257,20 @@ namespace SecuroteckClient
                                     {
                                         Console.WriteLine("Request Timed Out");
                                     }
+                                    break;
+                                case "Get":
+                                    if (userResponse[2] == "PublicKey")
+                                    {
+                                        Task<string> protectedGetPublicKey = GetProtectedPublicKey();
+                                        if (await Task.WhenAny(protectedGetPublicKey, Task.Delay(20000)) == protectedGetPublicKey)
+                                        {
+                                            Console.WriteLine(protectedGetPublicKey.Result);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Request Timed Out");
+                                        }
+                                    }                                    
                                     break;
                                 default:
                                     break;
