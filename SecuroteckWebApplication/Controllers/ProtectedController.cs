@@ -32,7 +32,7 @@ namespace SecuroteckWebApplication.Controllers
                 return BadRequest("Bad Request");
             }
 
-            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
             byte[] sha1ByteMessage;
             SHA1 sha1Provider = new SHA1CryptoServiceProvider();
             sha1ByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
@@ -49,7 +49,7 @@ namespace SecuroteckWebApplication.Controllers
                 return BadRequest("Bad Request");
             }
 
-            byte[] asciiByteMessage = System.Text.Encoding.ASCII.GetBytes(message);
+            byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
             byte[] sha256ByteMessage;
             SHA256 sha256Provider = new SHA256CryptoServiceProvider();
             sha256ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
@@ -61,7 +61,29 @@ namespace SecuroteckWebApplication.Controllers
         [HttpGet]
         public IHttpActionResult GetPublicKey(HttpRequestMessage request)
         {
-            return Ok(WebApiConfig.rsaProvider.ToXmlString(false));
+            Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            if (dbAccess.ApiKeyExists(request.Headers.GetValues("ApiKey").First()))
+            {
+                return Ok(WebApiConfig.rsaProvider.ToXmlString(false));
+            }
+            return BadRequest("Invalid API Key");
+        }
+
+        [CustomAuthorise]
+        [ActionName("sign")]
+        [HttpGet]
+        public IHttpActionResult GetSign(HttpRequestMessage request, [FromUri] string message)
+        {
+            Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            if (dbAccess.ApiKeyExists(request.Headers.GetValues("ApiKey").First()))
+            {
+                byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
+                byte[] encryptedBytes = WebApiConfig.rsaProvider.Encrypt(asciiByteMessage, true);
+                SHA1 sha1Provider = new SHA1CryptoServiceProvider();
+                encryptedBytes = sha1Provider.ComputeHash(encryptedBytes);
+                return Ok(BitConverter.ToString(encryptedBytes));
+            }
+            return BadRequest("Invalid API Key");
         }
     }
 }

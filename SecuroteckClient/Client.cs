@@ -7,15 +7,17 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.IO;
+using System.Security.Cryptography;
 
 namespace SecuroteckClient
 {
     #region Task 8 and beyond
     class Client
     {
-        public static string apiKey = "";
-        public static string userName = "";
-        public static string publicKey = "";
+        static string apiKey = "";
+        static string userName = "";
+        static RSACryptoServiceProvider clientRsaProvider = new RSACryptoServiceProvider();
+        static bool keyObtained = false;
         static HttpClient client = new HttpClient();
         static void Main(string[] args)
         {
@@ -48,7 +50,7 @@ namespace SecuroteckClient
 
             foreach (var item in intArray)
             {
-                path += "integers=" + item + "&";
+                path += $"integers={item}&";
             }
             path = path.Remove(path.Length - 1, 1);
             HttpResponseMessage response = await client.GetAsync(path);
@@ -57,7 +59,7 @@ namespace SecuroteckClient
         //User methods
         static async Task<string> GetUser(string user)
         {
-            string path = "api/user/new?username=" + user;
+            string path = $"api/user/new?username={user}";
             HttpResponseMessage response = await client.GetAsync(path);
             return await response.Content.ReadAsAsync<string>();
         }
@@ -77,7 +79,7 @@ namespace SecuroteckClient
         {
             if (apiKey != "")
             {
-                string path = "api/user/removeuser?username=" + user;
+                string path = $"api/user/removeuser?username={user}";
                 client.DefaultRequestHeaders.Add("ApiKey", apikey);
                 HttpResponseMessage response = await client.DeleteAsync(path);
                 return await response.Content.ReadAsAsync<string>();
@@ -102,7 +104,7 @@ namespace SecuroteckClient
         {
             if (apiKey != "")
             {
-                string path = "api/protected/sha1?message=" + message;
+                string path = $"api/protected/sha1?message={message}";
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
                 return await response.Content.ReadAsAsync<string>();
@@ -113,7 +115,7 @@ namespace SecuroteckClient
         {
             if (apiKey != "")
             {
-                string path = "api/protected/sha256?message=" + message;
+                string path = $"api/protected/sha256?message={message}";
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
                 return await response.Content.ReadAsAsync<string>();
@@ -122,16 +124,37 @@ namespace SecuroteckClient
         }
         static async Task<string> GetProtectedPublicKey()
         {
-            string path = "/api/protected/getpublickey";
-            client.DefaultRequestHeaders.Add("ApiKey", apiKey);
-            HttpResponseMessage response = await client.GetAsync(path);
-            if (response.IsSuccessStatusCode)
+            if (apiKey != "")
             {
-                apiKey = await response.Content.ReadAsAsync<string>();
-                return "Got Public Key";
+                string path = "/api/protected/getpublickey";
+                client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+                HttpResponseMessage response = await client.GetAsync(path);
+                if (response.IsSuccessStatusCode)
+                {
+                    string publicKey = await response.Content.ReadAsAsync<string>();
+                    clientRsaProvider.FromXmlString(publicKey);
+                    keyObtained = true;
+                    return "Got Public Key";
+                }
+                return "Couldn't Get the Public Key";
             }
-            return "Couldn't Get the Public Key";
-            
+            return "You need to do a User Post or User Set first";            
+        }
+        static async Task<string> GetProtectedSign(string message)
+        {
+            if (keyObtained)
+            {
+                string path = $"/api/protected/sign?message={message}";
+                client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+                HttpResponseMessage response = await client.GetAsync(path);
+                if (response.IsSuccessStatusCode)
+                {
+                    apiKey = await response.Content.ReadAsAsync<string>();
+                    return "Message was successfully signed";
+                }
+                return "Message was not successfully signed";
+            }
+            return "Client doesn't yet have the public key";
         }
 
         static async Task RunAsync()
@@ -277,7 +300,18 @@ namespace SecuroteckClient
                                         {
                                             Console.WriteLine("Request Timed Out");
                                         }
-                                    }                                    
+                                    }
+                                    break;
+                                case "Sign":
+                                    Task<string> protectedGetSign = GetProtectedSign(userResponse[2]);
+                                    if (await Task.WhenAny(protectedGetSign, Task.Delay(20000)) == protectedGetSign)
+                                    {
+                                        Console.WriteLine(protectedGetSign.Result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Request Timed Out");
+                                    }
                                     break;
                                 default:
                                     break;
