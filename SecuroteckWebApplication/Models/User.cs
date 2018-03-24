@@ -44,12 +44,8 @@ namespace SecuroteckWebApplication.Models
         public bool ApiKeyExists(string key)
         {
             using (var context = new UserContext())
-            {
-                if (context.Users.Find(key) != null)
-                {
-                    return true;
-                }
-                return false;
+            {                
+                return context.Users.Any(a => a.ApiKey == key);
             }
         }
         //check if username exists in database
@@ -64,12 +60,8 @@ namespace SecuroteckWebApplication.Models
         public bool ApiKeyUserExists(string key, string userName)
         {
             using (var context = new UserContext())
-            {
-                if (context.Users.Any(o => o.ApiKey == key && o.UserName == userName))
-                {
-                    return true;
-                }
-                return false;
+            {                
+                return context.Users.Any(o => o.ApiKey == key && o.UserName == userName);
             }
         }
         //check if api key exists in database, returns user
@@ -92,13 +84,14 @@ namespace SecuroteckWebApplication.Models
             }
         }
         #endregion
-        public void AddLog(User user, string message)
+        public void AddLog(string key, string message)
         {
             using (var context = new UserContext())
             {
+                User user = ApiKeyExistsReturnUser(key);
                 Log log = new Log(user, message);
-                user.UserLog.Add(log);
-                context.Logs.Add(log);
+                context.Users.Attach(log.User);
+                context.Logs.Add(log);                
                 context.SaveChanges();
             }
         }

@@ -9,7 +9,7 @@ namespace SecuroteckWebApplication.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(SecuroteckWebApplication.Models.UserContext context)

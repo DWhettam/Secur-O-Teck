@@ -19,10 +19,9 @@ namespace SecuroteckWebApplication.Controllers
             string key = request.Headers.GetValues("ApiKey").First().ToString();            
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             if (dbAccess.ApiKeyExists(key))
-            {
+            {                
+                dbAccess.AddLog(key, "Protected/Hello");
                 Models.User user = dbAccess.ApiKeyExistsReturnUser(key);
-                dbAccess.AddLog(user, "Protected/Hello");
-
                 return Ok("Hello " + user.UserName.ToString());
             }
             return BadRequest("Invalid API Key");
@@ -41,7 +40,7 @@ namespace SecuroteckWebApplication.Controllers
             }            
             else if (dbAccess.ApiKeyExists(key))
             {
-                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/SHA1");
+                dbAccess.AddLog(key, "Protected/SHA1");
 
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
                 byte[] sha1ByteMessage;
@@ -65,7 +64,7 @@ namespace SecuroteckWebApplication.Controllers
             }
             else if (dbAccess.ApiKeyExists(key))
             {                
-                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/SHA256");
+                dbAccess.AddLog(key, "Protected/SHA256");
 
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
                 byte[] sha256ByteMessage;
@@ -85,7 +84,7 @@ namespace SecuroteckWebApplication.Controllers
             string key = request.Headers.GetValues("ApiKey").First().ToString();
             if (dbAccess.ApiKeyExists(key))
             {
-                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/GetPublicKey");
+                dbAccess.AddLog(key, "Protected/GetPublicKey");
                 return Ok(WebApiConfig.rsaProvider.ToXmlString(false));
             }
             return BadRequest("Invalid API Key");
@@ -100,8 +99,7 @@ namespace SecuroteckWebApplication.Controllers
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             if (dbAccess.ApiKeyExists(key))
             {
-                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/Sign");
-
+                dbAccess.AddLog(key, "Protected/GetPublicKey");
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
                 byte[] encryptedBytes = WebApiConfig.rsaProvider.Encrypt(asciiByteMessage, true);
                 SHA1 sha1Provider = new SHA1CryptoServiceProvider();
