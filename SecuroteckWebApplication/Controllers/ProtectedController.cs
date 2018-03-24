@@ -16,44 +16,64 @@ namespace SecuroteckWebApplication.Controllers
         [HttpGet]
         public IHttpActionResult GetHello(HttpRequestMessage request)
         {
-            string key = request.Headers.GetValues("ApiKey").First().ToString();
+            string key = request.Headers.GetValues("ApiKey").First().ToString();            
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
-            Models.User user = dbAccess.ApiKeyExistsReturnUser(key);           
-            return Ok("Hello " + user.UserName.ToString());
+            if (dbAccess.ApiKeyExists(key))
+            {
+                Models.User user = dbAccess.ApiKeyExistsReturnUser(key);
+                dbAccess.AddLog(user, "Protected/Hello");
+
+                return Ok("Hello " + user.UserName.ToString());
+            }
+            return BadRequest("Invalid API Key");
         }
 
         [CustomAuthorise]
         [ActionName("sha1")]
         [HttpGet]
-        public IHttpActionResult SHA1([FromUri] string message)
+        public IHttpActionResult SHA1(HttpRequestMessage request, [FromUri] string message)
         {
+            Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            string key = request.Headers.GetValues("ApiKey").First().ToString();
             if (message == "")
             {
-                return BadRequest("Bad Request");
-            }
+                return BadRequest("No message provided");
+            }            
+            else if (dbAccess.ApiKeyExists(key))
+            {
+                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/SHA1");
 
-            byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
-            byte[] sha1ByteMessage;
-            SHA1 sha1Provider = new SHA1CryptoServiceProvider();
-            sha1ByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
-            return Ok(BitConverter.ToString(sha1ByteMessage));
+                byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
+                byte[] sha1ByteMessage;
+                SHA1 sha1Provider = new SHA1CryptoServiceProvider();
+                sha1ByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
+                return Ok(BitConverter.ToString(sha1ByteMessage));
+            }
+            return BadRequest("Invalid API Key");            
         }
 
         [CustomAuthorise]
         [ActionName("sha256")]
         [HttpGet]
-        public IHttpActionResult SHA256([FromUri] string message)
+        public IHttpActionResult SHA256(HttpRequestMessage request, [FromUri] string message)
         {
+            Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            string key = request.Headers.GetValues("ApiKey").First().ToString();
             if (message == "")
             {
                 return BadRequest("Bad Request");
             }
+            else if (dbAccess.ApiKeyExists(key))
+            {                
+                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/SHA256");
 
-            byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
-            byte[] sha256ByteMessage;
-            SHA256 sha256Provider = new SHA256CryptoServiceProvider();
-            sha256ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
-            return Ok(BitConverter.ToString(sha256ByteMessage));
+                byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
+                byte[] sha256ByteMessage;
+                SHA256 sha256Provider = new SHA256CryptoServiceProvider();
+                sha256ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
+                return Ok(BitConverter.ToString(sha256ByteMessage));
+            }
+            return BadRequest("Invalid API Key");
         }
 
         [CustomAuthorise]
@@ -62,8 +82,10 @@ namespace SecuroteckWebApplication.Controllers
         public IHttpActionResult GetPublicKey(HttpRequestMessage request)
         {
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
-            if (dbAccess.ApiKeyExists(request.Headers.GetValues("ApiKey").First()))
+            string key = request.Headers.GetValues("ApiKey").First().ToString();
+            if (dbAccess.ApiKeyExists(key))
             {
+                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/GetPublicKey");
                 return Ok(WebApiConfig.rsaProvider.ToXmlString(false));
             }
             return BadRequest("Invalid API Key");
@@ -74,9 +96,12 @@ namespace SecuroteckWebApplication.Controllers
         [HttpGet]
         public IHttpActionResult GetSign(HttpRequestMessage request, [FromUri] string message)
         {
+            string key = request.Headers.GetValues("ApiKey").First().ToString();
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
-            if (dbAccess.ApiKeyExists(request.Headers.GetValues("ApiKey").First()))
+            if (dbAccess.ApiKeyExists(key))
             {
+                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "Protected/Sign");
+
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
                 byte[] encryptedBytes = WebApiConfig.rsaProvider.Encrypt(asciiByteMessage, true);
                 SHA1 sha1Provider = new SHA1CryptoServiceProvider();

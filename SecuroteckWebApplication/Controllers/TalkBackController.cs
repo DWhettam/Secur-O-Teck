@@ -12,18 +12,13 @@ namespace SecuroteckWebApplication.Controllers
         [ActionName("Hello")]
         public IHttpActionResult Get()
         {
-            #region TASK1
             return Ok("Hello World");
-            #endregion
         }
 
         [ActionName("Sort")]
         public IHttpActionResult Get([FromUri]int[] integers)
         {
-            #region TASK1
             return Ok(integers.OrderBy(i => i).ToArray());
-            #endregion
-        }
-
+        }        
     }
 }

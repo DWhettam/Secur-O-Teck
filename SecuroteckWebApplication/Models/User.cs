@@ -13,11 +13,12 @@ namespace SecuroteckWebApplication.Models
             [Key]
             public string ApiKey { get; set; }
             public string UserName { get; set; }
+            public virtual ICollection<Log> UserLog { get; set; }
         #endregion
     }
 
     #region Task11?
-    // TODO: You may find it useful to add code here for Log
+    
     #endregion
 
     public class UserDatabaseAccess
@@ -79,7 +80,7 @@ namespace SecuroteckWebApplication.Models
                 return context.Users.Find(key);
             }
         }
-
+        //delete user
         public void DeleteUser(string key)
         {   
             using (var context = new UserContext())
@@ -91,5 +92,15 @@ namespace SecuroteckWebApplication.Models
             }
         }
         #endregion
+        public void AddLog(User user, string message)
+        {
+            using (var context = new UserContext())
+            {
+                Log log = new Log(user, message);
+                user.UserLog.Add(log);
+                context.Logs.Add(log);
+                context.SaveChanges();
+            }
+        }
     }
 }

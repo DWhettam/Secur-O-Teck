@@ -28,6 +28,10 @@ namespace SecuroteckWebApplication.Controllers
             }
             
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            if (dbAccess.UserExists(username))
+            {
+                return BadRequest("A user with the given username already exists");
+            }
             Models.User newUser = dbAccess.InsertUser(username);
             return Ok(newUser.ApiKey);
         }               
@@ -39,6 +43,7 @@ namespace SecuroteckWebApplication.Controllers
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             if (dbAccess.ApiKeyUserExists(key, username))
             {
+                dbAccess.AddLog(dbAccess.ApiKeyExistsReturnUser(key), "User/RemoveUser");
                 dbAccess.DeleteUser(key);
                 return Ok(true);
             }
