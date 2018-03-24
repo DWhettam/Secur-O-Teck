@@ -17,8 +17,10 @@ namespace SecuroteckWebApplication
             GlobalConfiguration.Configuration.MessageHandlers.Add(new APIAuthorisationHandler());
 
             #region Task 9
-            CspParameters cspParams = new CspParameters();
-            cspParams.Flags = CspProviderFlags.UseMachineKeyStore;
+            CspParameters cspParams = new CspParameters
+            {
+                Flags = CspProviderFlags.UseMachineKeyStore
+            };
             rsaProvider = new RSACryptoServiceProvider(cspParams);
             string publicKey = rsaProvider.ToXmlString(false);
             #endregion

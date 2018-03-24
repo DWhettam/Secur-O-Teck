@@ -156,6 +156,70 @@ namespace SecuroteckClient
             }
             return "Client doesn't yet have the public key";
         }
+        static async Task<string> GetProtectedAddFify(string message)
+        {            
+            if (keyObtained)
+            {
+                if (apiKey != "")
+                {
+                    if (int.TryParse(message, out int value))
+                    {
+                        AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider();
+                        aesProvider.GenerateKey();
+                        aesProvider.GenerateIV();
+                        ICryptoTransform encryptor = aesProvider.CreateEncryptor();
+
+                        byte[] asciiByteMessage = BitConverter.GetBytes(value);
+                        byte[] asciiByteKey = aesProvider.Key;
+                        byte[] asciiByteIV = aesProvider.IV;
+
+                        byte[] encryptedByteMessage = clientRsaProvider.Encrypt(asciiByteMessage, true);
+                        byte[] encryptedByteKey = clientRsaProvider.Encrypt(asciiByteKey, true);
+                        byte[] encryptedByteIV = clientRsaProvider.Encrypt(asciiByteIV, true);
+
+                        string hexMessage = BitConverter.ToString(encryptedByteMessage);
+                        string hexKey = BitConverter.ToString(encryptedByteKey);
+                        string hexIV = BitConverter.ToString(encryptedByteIV);
+
+                        string path = $"/api/protected/addfifty?encryptedInteger={hexMessage}&encryptedsymkey={hexKey}&encryptedIV={hexIV}";
+                        client.DefaultRequestHeaders.Add("ApiKey", apiKey);
+                        HttpResponseMessage response = await client.GetAsync(path);
+                        if (response.IsSuccessStatusCode)
+                        {               
+                            string serverReponse = await response.Content.ReadAsAsync<string>();
+                            byte[] encryptedMessageBytes = StringToByteArray(serverReponse.Replace("-", string.Empty));
+                            string plaintext;
+
+                            ICryptoTransform decryptor = aesProvider.CreateDecryptor();
+                            using (MemoryStream ms = new MemoryStream(encryptedMessageBytes))
+                            {
+                                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                                {
+                                    using (StreamReader sr = new StreamReader(cs))
+                                    {
+                                        plaintext = sr.ReadToEnd();
+                                    }
+                                }
+                            }
+                            return plaintext;
+                        }
+                        return "Bad Request";
+                    }
+                    return "A valid integer must be given!";
+                }
+                return "You need to do a User Post or User Set first";
+            }
+            return "Client doesn't yet have the public key";
+        }
+
+        public static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
 
         static async Task RunAsync()
         {            
@@ -313,6 +377,17 @@ namespace SecuroteckClient
                                         Console.WriteLine("Request Timed Out");
                                     }
                                     break;
+                                case "AddFifty":
+                                    Task<string> protectedGetAddFifty = GetProtectedAddFify(userResponse[2]);
+                                    if (await Task.WhenAny(protectedGetAddFifty, Task.Delay(20000)) == protectedGetAddFifty)
+                                    {
+                                        Console.WriteLine(protectedGetAddFifty.Result);
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Request Timed Out");
+                                    }
+                                    break;
                                 default:
                                     break;
                             }
@@ -326,6 +401,7 @@ namespace SecuroteckClient
                 {
                     Console.WriteLine(ex.Message);
                 }
+                Console.Clear();
                 Console.WriteLine("What would you like to do next?");
                 response = Console.ReadLine();
             }            

@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
 
 namespace SecuroteckWebApplication.Controllers
 {
@@ -101,12 +102,66 @@ namespace SecuroteckWebApplication.Controllers
             {
                 dbAccess.AddLog(key, "Protected/GetPublicKey");
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
-                byte[] encryptedBytes = WebApiConfig.rsaProvider.Encrypt(asciiByteMessage, true);
                 SHA1 sha1Provider = new SHA1CryptoServiceProvider();
-                encryptedBytes = sha1Provider.ComputeHash(encryptedBytes);
+                asciiByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
+                byte[] encryptedBytes = WebApiConfig.rsaProvider.Encrypt(asciiByteMessage, true);
+                
                 return Ok(BitConverter.ToString(encryptedBytes));
             }
             return BadRequest("Invalid API Key");
         }
+
+        [CustomAuthorise]
+        [ActionName("addfifty")]
+        [HttpGet]
+        public IHttpActionResult GetAddFifty(HttpRequestMessage request, [FromUri] string encryptedInteger, [FromUri] string encryptedsymkey, [FromUri] string encryptedIV)
+        {
+            string key = request.Headers.GetValues("ApiKey").First().ToString();
+            Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
+            if (dbAccess.ApiKeyExists(key))
+            {
+                byte[] encryptedByteMessage = StringToByteArray(encryptedInteger.Replace("-", string.Empty));
+                byte[] encryptedByteKey = StringToByteArray(encryptedsymkey.Replace("-", string.Empty));
+                byte[] encryptedByteIV = StringToByteArray(encryptedIV.Replace("-", string.Empty));
+
+                string test = WebApiConfig.rsaProvider.ToXmlString(true);
+
+                byte[] decryptedByteMessage = WebApiConfig.rsaProvider.Decrypt(encryptedByteMessage, true);
+                byte[] decryptedByteKey = WebApiConfig.rsaProvider.Decrypt(encryptedByteKey, true);
+                byte[] decryptedByteIV = WebApiConfig.rsaProvider.Decrypt(encryptedByteIV, true);
+
+                int plaintextMessage = BitConverter.ToInt32(decryptedByteMessage, 0);
+                string response = (plaintextMessage + 50).ToString();
+                byte[] encryptedMessageBytes;
+
+                AesCryptoServiceProvider aesProvider = new AesCryptoServiceProvider();
+                aesProvider.Key = decryptedByteKey;
+                aesProvider.IV = decryptedByteIV;
+                ICryptoTransform encryptor = aesProvider.CreateEncryptor();
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter sw = new StreamWriter(cs))
+                        {
+                            sw.Write(response);
+                        }
+                        encryptedMessageBytes = ms.ToArray();
+                    }
+                }
+                return Ok(BitConverter.ToString(encryptedMessageBytes));                
+            }            
+            return BadRequest("Bad Request");
+        }
+
+        public static byte[] StringToByteArray(String hex)
+        {
+            int NumberChars = hex.Length;
+            byte[] bytes = new byte[NumberChars / 2];
+            for (int i = 0; i < NumberChars; i += 2)
+                bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
+            return bytes;
+        }
     }
 }
