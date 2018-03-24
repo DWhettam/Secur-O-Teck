@@ -9,12 +9,15 @@ namespace SecuroteckWebApplication.Models
 {
     public class Log
     {
-        public Log(User user, string logString)
+        public Log(User user, string userName, string logString)
         {
             LogString = logString;
             LogDateTime = DateTime.Now;
-            User = user; 
+            User = user;
+            UserName = userName;
         }
+        public Log()
+        { }
 
         [Key]  
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -22,5 +25,6 @@ namespace SecuroteckWebApplication.Models
         public string LogString { get; set; }
         public DateTime LogDateTime { get; set; }
         public virtual User User { get; set; }
+        public string UserName { get; set; }
     }
 }

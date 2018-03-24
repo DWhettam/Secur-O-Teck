@@ -43,7 +43,7 @@ namespace SecuroteckWebApplication.Controllers
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             if (dbAccess.ApiKeyUserExists(key, username))
             {
-                dbAccess.AddLog(key, "User/RemoveUser");
+                dbAccess.AddLog(key, "User/RemoveUser");                
                 dbAccess.DeleteUser(key);
                 return Ok(true);
             }

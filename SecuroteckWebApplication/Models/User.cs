@@ -17,13 +17,8 @@ namespace SecuroteckWebApplication.Models
         #endregion
     }
 
-    #region Task11?
-    
-    #endregion
-
     public class UserDatabaseAccess
     {
-        #region Task3 
         //Insert user
         public User InsertUser(string userName)
         {
@@ -78,18 +73,23 @@ namespace SecuroteckWebApplication.Models
             using (var context = new UserContext())
             {
                 User user = context.Users.First(a => a.ApiKey == key);
+                List<Log> logs = context.Logs.Where(c => c.User.ApiKey == key).ToList();
+                foreach (var log in logs)
+                {
+                    log.User = null;
+                }                
                 context.Users.Attach(user);
                 context.Users.Remove(user);
                 context.SaveChanges();
             }
         }
-        #endregion
+        //Add log
         public void AddLog(string key, string message)
         {
             using (var context = new UserContext())
             {
                 User user = ApiKeyExistsReturnUser(key);
-                Log log = new Log(user, message);
+                Log log = new Log(user, user.UserName, message);
                 context.Users.Attach(log.User);
                 context.Logs.Add(log);                
                 context.SaveChanges();
