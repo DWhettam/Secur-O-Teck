@@ -101,11 +101,10 @@ namespace SecuroteckWebApplication.Controllers
             if (dbAccess.ApiKeyExists(key))
             {
                 dbAccess.AddLog(key, "Protected/GetPublicKey");
-                byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
-                SHA1 sha1Provider = new SHA1CryptoServiceProvider();
-                asciiByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
-                byte[] encryptedBytes = WebApiConfig.rsaProvider.Encrypt(asciiByteMessage, true);
-                
+
+                byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);               
+                byte[] encryptedBytes = WebApiConfig.rsaProvider.SignData(asciiByteMessage, CryptoConfig.MapNameToOID("SHA1"));
+                                
                 return Ok(BitConverter.ToString(encryptedBytes));
             }
             return BadRequest("Invalid API Key");
@@ -130,7 +129,8 @@ namespace SecuroteckWebApplication.Controllers
                 byte[] decryptedByteKey = WebApiConfig.rsaProvider.Decrypt(encryptedByteKey, true);
                 byte[] decryptedByteIV = WebApiConfig.rsaProvider.Decrypt(encryptedByteIV, true);
 
-                int plaintextMessage = BitConverter.ToInt32(decryptedByteMessage, 0);
+                int plaintextMessage = BitConverter.ToInt32(decryptedByteMessage, 0);
+
                 string response = (plaintextMessage + 50).ToString();
                 byte[] encryptedMessageBytes;
 
@@ -162,6 +162,7 @@ namespace SecuroteckWebApplication.Controllers
             for (int i = 0; i < NumberChars; i += 2)
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
             return bytes;
-        }
+        }
+
     }
 }

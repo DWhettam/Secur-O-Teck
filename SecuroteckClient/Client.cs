@@ -149,10 +149,19 @@ namespace SecuroteckClient
                 HttpResponseMessage response = await client.GetAsync(path);
                 if (response.IsSuccessStatusCode)
                 {
-                    apiKey = await response.Content.ReadAsAsync<string>();
-                    return "Message was successfully signed";
+                    string signedMessage = await response.Content.ReadAsAsync<string>();
+                    byte[] signedData = StringToByteArray(signedMessage.Replace("-", string.Empty));
+                    byte[] byteMessage = Encoding.ASCII.GetBytes(message);
+
+                    SHA1 Hash = new SHA1CryptoServiceProvider();
+                    //byte[] hashedData = Hash.ComputeHash(byteMessage);
+                    if (clientRsaProvider.VerifyData(byteMessage, CryptoConfig.MapNameToOID("SHA1"), signedData))
+                    {
+                        return "Message was successfully signed";
+                    }
+                    return "Message was not successfully signed";
                 }
-                return "Message was not successfully signed";
+                return response.ReasonPhrase;
             }
             return "Client doesn't yet have the public key";
         }
@@ -219,8 +228,8 @@ namespace SecuroteckClient
             for (int i = 0; i < NumberChars; i += 2)
                 bytes[i / 2] = Convert.ToByte(hex.Substring(i, 2), 16);
             return bytes;
-        }
-
+        }
+    
         static async Task RunAsync()
         {            
             // Update port # in the following line.
@@ -266,6 +275,7 @@ namespace SecuroteckClient
                                     }
                                     break;
                                 default:
+                                    Console.WriteLine("Unrecognised Command");
                                     break;
                             }
                             break;
@@ -313,6 +323,7 @@ namespace SecuroteckClient
                                     }
                                     break;
                                 default:
+                                    Console.WriteLine("Unrecognised Command");
                                     break;
                             }
                             break;
@@ -389,6 +400,7 @@ namespace SecuroteckClient
                                     }
                                     break;
                                 default:
+                                    Console.WriteLine("Unrecognised Command");
                                     break;
                             }
                             break;
@@ -400,10 +412,10 @@ namespace SecuroteckClient
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                }
-                Console.Clear();
+                }                
                 Console.WriteLine("What would you like to do next?");
                 response = Console.ReadLine();
+                Console.Clear();
             }            
         }
     }
