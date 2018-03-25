@@ -15,6 +15,7 @@ namespace SecuroteckWebApplication
         {
             // Web API configuration and services
             GlobalConfiguration.Configuration.MessageHandlers.Add(new APIAuthorisationHandler());
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
             #region Task 9
             CspParameters cspParams = new CspParameters

@@ -69,7 +69,7 @@ namespace SecuroteckClient
             HttpResponseMessage response = await client.PostAsJsonAsync(path, user);
             if (response.IsSuccessStatusCode)
             {
-                apiKey = response.Content.ReadAsAsync<string>().Result;
+                apiKey = await response.Content.ReadAsAsync<string>();
                 userName = user;
                 return "Got API Key";
             }           
