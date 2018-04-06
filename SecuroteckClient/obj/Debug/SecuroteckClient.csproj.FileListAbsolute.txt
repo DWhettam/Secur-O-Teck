@@ -16,3 +16,14 @@ C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\Secu
 C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.csproj.CopyComplete
 C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.exe
 C:\Users\dwhet\Desktop\Projects\Distributed Systems\Coursework\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.pdb
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\SecuroteckClient.exe.config
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\SecuroteckClient.exe
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\SecuroteckClient.pdb
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\Newtonsoft.Json.dll
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\System.Net.Http.Formatting.dll
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\Newtonsoft.Json.xml
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\bin\Debug\System.Net.Http.Formatting.xml
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.csprojResolveAssemblyReference.cache
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.csproj.CoreCompileInputs.cache
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.exe
+E:\Users\Dan\Uni\Modules\Secur-O-Teck\SecuroteckClient\obj\Debug\SecuroteckClient.pdb

@@ -19,6 +19,7 @@ namespace SecuroteckWebApplication.Models
 
     public class UserDatabaseAccess
     {
+        public static UserDatabaseAccess udb = new UserDatabaseAccess();
         //Insert user
         public User InsertUser(string userName)
         {
