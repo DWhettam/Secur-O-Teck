@@ -7,22 +7,24 @@ using System.Web;
 using System.Xml;
 namespace SecuroteckWebApplication.Models
 {
-    public class Log
+    public class LogArchive
     {
-        public Log(User user, string userName, string logString)
+        public LogArchive(string apiKey, string userName, string logString)
         {
             LogString = logString;
             LogDateTime = DateTime.Now;
-            User = user;            
+            ApiKey = apiKey;
+            UserName = userName;
         }
-        public Log()
+        public LogArchive()
         { }
 
-        [Key]  
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int LogId { get; set; }
         public string LogString { get; set; }
         public DateTime LogDateTime { get; set; }
-        public virtual User User { get; set; }       
+        public string ApiKey { get; set; }
+        public string UserName { get; set; }
     }
 }

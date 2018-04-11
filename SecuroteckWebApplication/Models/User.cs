@@ -75,12 +75,13 @@ namespace SecuroteckWebApplication.Models
             {
                 User user = context.Users.First(a => a.ApiKey == key);
                 List<Log> logs = context.Logs.Where(c => c.User.ApiKey == key).ToList();
+                List<LogArchive> archive = new List<LogArchive>();
                 foreach (var log in logs)
                 {
                     log.User = null;
                 }                
                 context.Users.Attach(user);
-                context.Users.Remove(user);
+                context.Users.Remove(user);                
                 context.SaveChanges();
             }
         }
@@ -91,8 +92,10 @@ namespace SecuroteckWebApplication.Models
             {
                 User user = ApiKeyExistsReturnUser(key);
                 Log log = new Log(user, user.UserName, message);
-                context.Users.Attach(log.User);
-                context.Logs.Add(log);                
+                LogArchive archive = new LogArchive(user.ApiKey, user.UserName, message);
+                context.Users.Attach(log.User);                
+                context.Logs.Add(log);
+                context.Archive.Add(archive);
                 context.SaveChanges();
             }
         }

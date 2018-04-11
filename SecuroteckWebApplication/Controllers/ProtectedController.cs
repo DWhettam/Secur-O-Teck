@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.IO;
+using SecuroteckWebApplication.Models;
 
 namespace SecuroteckWebApplication.Controllers
 {
@@ -41,7 +42,7 @@ namespace SecuroteckWebApplication.Controllers
             }            
             else if (dbAccess.ApiKeyExists(key))
             {
-                dbAccess.AddLog(key, "Protected/SHA1");
+                dbAccess.AddLog(key, $"Protected/SHA1 {message}");
 
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
                 byte[] sha1ByteMessage;
@@ -65,7 +66,7 @@ namespace SecuroteckWebApplication.Controllers
             }
             else if (dbAccess.ApiKeyExists(key))
             {                
-                dbAccess.AddLog(key, "Protected/SHA256");
+                dbAccess.AddLog(key, $"Protected/SHA256 {message}");
 
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);
                 byte[] sha256ByteMessage;
@@ -100,7 +101,7 @@ namespace SecuroteckWebApplication.Controllers
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             if (dbAccess.ApiKeyExists(key))
             {
-                dbAccess.AddLog(key, "Protected/GetPublicKey");
+                dbAccess.AddLog(key, $"Protected/GetPublicKey {message}");
 
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);               
                 byte[] encryptedBytes = WebApiConfig.rsaProvider.SignData(asciiByteMessage, CryptoConfig.MapNameToOID("SHA1"));
@@ -113,7 +114,7 @@ namespace SecuroteckWebApplication.Controllers
         [CustomAuthorise]
         [ActionName("addfifty")]
         [HttpGet]
-        public IHttpActionResult GetAddFifty(HttpRequestMessage request, [FromUri] string encryptedInteger, [FromUri] string encryptedsymkey, [FromUri] string encryptedIV)
+        public IHttpActionResult GetAddFifty(HttpRequestMessage request, [FromUri] string encryptedInteger, [FromUri] string encryptedsymkey, [FromUri] string encryptedIV)   
         {
             string key = request.Headers.GetValues("ApiKey").First().ToString();
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
@@ -150,6 +151,7 @@ namespace SecuroteckWebApplication.Controllers
                         encryptedMessageBytes = ms.ToArray();
                     }
                 }
+                UserDatabaseAccess.udb.AddLog(key, $"Protected/AddFifty {plaintextMessage}");
                 return Ok(BitConverter.ToString(encryptedMessageBytes));                
             }            
             return BadRequest("Bad Request");
