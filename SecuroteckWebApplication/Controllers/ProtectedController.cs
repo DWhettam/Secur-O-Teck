@@ -101,7 +101,7 @@ namespace SecuroteckWebApplication.Controllers
             Models.UserDatabaseAccess dbAccess = new Models.UserDatabaseAccess();
             if (dbAccess.ApiKeyExists(key))
             {
-                dbAccess.AddLog(key, $"Protected/GetPublicKey {message}");
+                dbAccess.AddLog(key, $"Protected/GetSign {message}");
 
                 byte[] asciiByteMessage = Encoding.ASCII.GetBytes(message);               
                 byte[] encryptedBytes = WebApiConfig.rsaProvider.SignData(asciiByteMessage, CryptoConfig.MapNameToOID("SHA1"));
