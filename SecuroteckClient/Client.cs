@@ -40,28 +40,58 @@ namespace SecuroteckClient
         static async Task<string> GetTalkBackHello(string path)
         {
             HttpResponseMessage response = await client.GetAsync(path);
-            return await response.Content.ReadAsAsync<string>();            
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<string>();
+            }
+            else
+            {
+                return response.ReasonPhrase;
+            }                  
         }
         static async Task<string> GetTalkBackSort(string intArrayString)
         {
             string path = "/api/talkback/sort?";
             intArrayString = intArrayString.Substring(1, intArrayString.Length - 2);
-            int[] intArray = intArrayString.Split(',').Select(int.Parse).ToArray();
 
-            foreach (var item in intArray)
+            if (intArrayString != "")
             {
-                path += $"integers={item}&";
-            }
-            path = path.Remove(path.Length - 1, 1);
+                if (!intArrayString.All(char.IsDigit))
+                {
+                    return "Invalid input";
+                }
+                int[] intArray = intArrayString.Split(',').Select(int.Parse).ToArray();
+
+                foreach (var item in intArray)
+                {
+                    path += $"integers={item}&";
+                }
+                path = path.Remove(path.Length - 1, 1);
+            }            
             HttpResponseMessage response = await client.GetAsync(path);
-            return await response.Content.ReadAsStringAsync();
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+            else
+            {
+                return response.ReasonPhrase;
+            }
+           
         }
         //User methods
         static async Task<string> GetUser(string user)
         {
             string path = $"api/user/new?username={user}";
             HttpResponseMessage response = await client.GetAsync(path);
-            return await response.Content.ReadAsAsync<string>();
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsAsync<string>();
+            }
+            else
+            {
+                return response.ReasonPhrase;
+            }            
         }
         static async Task<string> PostUser(string user)
         {
@@ -72,8 +102,11 @@ namespace SecuroteckClient
                 apiKey = await response.Content.ReadAsAsync<string>();
                 userName = user;
                 return "Got API Key";
-            }           
-            return await response.Content.ReadAsAsync<string>();
+            }
+            else
+            {
+                return response.ReasonPhrase;
+            }            
         }
         static async Task<string> DeleteUser(string apikey, string user)
         {
@@ -82,7 +115,14 @@ namespace SecuroteckClient
                 string path = $"api/user/removeuser?username={user}";
                 client.DefaultRequestHeaders.Add("ApiKey", apikey);
                 HttpResponseMessage response = await client.DeleteAsync(path);
-                return await response.Content.ReadAsAsync<string>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<string>();
+                }
+                else
+                {
+                    return response.ReasonPhrase;
+                }
             }
             return "You need to do a User Post or User Set first";
 
@@ -95,7 +135,14 @@ namespace SecuroteckClient
                 string path = "api/protected/hello";
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
-                return await response.Content.ReadAsAsync<string>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<string>();
+                }
+                else
+                {
+                    return response.ReasonPhrase;
+                }
             }
             return "You need to do a User Post or User Set first";
 
@@ -107,7 +154,14 @@ namespace SecuroteckClient
                 string path = $"api/protected/sha1?message={message}";
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
-                return await response.Content.ReadAsAsync<string>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<string>();
+                }
+                else
+                {
+                    return response.ReasonPhrase;
+                }
             }
             return "You need to do a User Post or User Set first";
         }
@@ -118,7 +172,14 @@ namespace SecuroteckClient
                 string path = $"api/protected/sha256?message={message}";
                 client.DefaultRequestHeaders.Add("ApiKey", apiKey);
                 HttpResponseMessage response = await client.GetAsync(path);
-                return await response.Content.ReadAsAsync<string>();
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.ReadAsAsync<string>();
+                }
+                else
+                {
+                    return response.ReasonPhrase;
+                }
             }
             return "You need to do a User Post or User Set first";
         }
