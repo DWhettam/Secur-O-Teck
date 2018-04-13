@@ -23,7 +23,9 @@ namespace SecuroteckWebApplication.Controllers
             {
                 return BadRequest();
             }
-            return Ok(integers.OrderBy(i => i).ToArray());
+
+            int[] output = Array.ConvertAll(integers, int.Parse);
+            return Ok(output.OrderBy(i => i).ToArray());
         }        
     }
 }

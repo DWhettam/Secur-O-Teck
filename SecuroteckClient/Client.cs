@@ -55,13 +55,8 @@ namespace SecuroteckClient
             intArrayString = intArrayString.Substring(1, intArrayString.Length - 2);
 
             if (intArrayString != "")
-            {
-                string split = string.Join(",", intArrayString);
-                if (split.Any(x => char.IsLetter(x)))
-                {
-                    return "Invalid input";
-                }
-                int[] intArray = intArrayString.Split(',').Select(int.Parse).ToArray();
+            {                
+                string[] intArray = intArrayString.Split(',').ToArray();
 
                 foreach (var item in intArray)
                 {
@@ -295,8 +290,7 @@ namespace SecuroteckClient
         static async Task RunAsync()
         {            
             // Update port # in the following line.
-            client.BaseAddress = new Uri("http://localhost:24702/");
-            //LoadDetailsFromFile();
+            client.BaseAddress = new Uri("http://localhost:24702/");            
             Console.WriteLine("Hello. What would you like to do?");
             string response = Console.ReadLine();
 
@@ -473,7 +467,7 @@ namespace SecuroteckClient
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Unrecognised Command");
                 }                
                 Console.WriteLine("What would you like to do next?");
                 response = Console.ReadLine();
