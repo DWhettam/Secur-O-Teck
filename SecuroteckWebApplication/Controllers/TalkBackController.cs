@@ -16,8 +16,13 @@ namespace SecuroteckWebApplication.Controllers
         }
 
         [ActionName("Sort")]
-        public IHttpActionResult Get([FromUri]int[] integers)
+        public IHttpActionResult Get([FromUri]string[] integers)
         {
+            string split = string.Join(",", integers);
+            if (split.Any(x => char.IsLetter(x)))
+            {
+                return BadRequest();
+            }
             return Ok(integers.OrderBy(i => i).ToArray());
         }        
     }

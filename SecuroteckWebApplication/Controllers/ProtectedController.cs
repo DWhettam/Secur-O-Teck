@@ -48,7 +48,7 @@ namespace SecuroteckWebApplication.Controllers
                 byte[] sha1ByteMessage;
                 SHA1 sha1Provider = new SHA1CryptoServiceProvider();
                 sha1ByteMessage = sha1Provider.ComputeHash(asciiByteMessage);
-                return Ok(BitConverter.ToString(sha1ByteMessage));
+                return Ok(BitConverter.ToString(sha1ByteMessage).Replace("-", ""));
             }
             return BadRequest("Invalid API Key");            
         }
@@ -72,7 +72,7 @@ namespace SecuroteckWebApplication.Controllers
                 byte[] sha256ByteMessage;
                 SHA256 sha256Provider = new SHA256CryptoServiceProvider();
                 sha256ByteMessage = sha256Provider.ComputeHash(asciiByteMessage);
-                return Ok(BitConverter.ToString(sha256ByteMessage));
+                return Ok(BitConverter.ToString(sha256ByteMessage).Replace("-", ""));
             }
             return BadRequest("Invalid API Key");
         }

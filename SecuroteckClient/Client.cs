@@ -56,7 +56,8 @@ namespace SecuroteckClient
 
             if (intArrayString != "")
             {
-                if (!intArrayString.All(char.IsDigit))
+                string split = string.Join(",", intArrayString);
+                if (split.Any(x => char.IsLetter(x)))
                 {
                     return "Invalid input";
                 }
